@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const units = [{value:1, label:"Unidad"}, {value:2, label:"Gramos (gr)"}, {value:3, label:"Kilos (kg)"},{value:4, label:"Litros (lts)"} ]
 
@@ -23,6 +29,14 @@ class KitchenComponent extends Component {
         
         return (
             <React.Fragment>
+                <ExpansionPanel>
+                    <ExpansionPanelSummary 
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"> 
+                        Cargar Nuevo Producto
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
                    <TextField
                         id="descripction"
                         label="Descripcion"
@@ -32,6 +46,7 @@ class KitchenComponent extends Component {
                         variant="outlined"
                         helperText="Ingrese la descripcion del producto"
                     />
+
                     <TextField
                         id="selectPound"
                         select
@@ -59,6 +74,12 @@ class KitchenComponent extends Component {
                         variant="outlined"
                         helperText="Ingrese la cantidad disponible"
                     />
+
+                    <Button variant="contained" color="primary" size="large"  style={{marginTop:20, marginBottom:40, marginLeft:20}}>
+                        Cargar
+                    </Button>
+                    </ExpansionPanelDetails>
+                    </ExpansionPanel>
             </React.Fragment>
             );
     }
