@@ -11,10 +11,17 @@ class KitchenComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            unit: undefined
+            unit: undefined,
+            open: true
         }
+        this.onSitchList = this.onSitchList.bind(this);
     }
 
+    onSitchList(){
+        this.setState({
+            open: !this.state.open
+        })
+    }
     render() {
         return (
             <React.Fragment>
@@ -30,10 +37,11 @@ class KitchenComponent extends Component {
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
 
-                <ExpansionPanel>
-                    <ExpansionPanelSummary
+                <ExpansionPanel expanded={this.state.open}>
+                    <ExpansionPanelSummary 
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2a-content"
+                        onClick={this.onSitchList}
                         id="panel2a-header">
                         Stock Actual
                     </ExpansionPanelSummary>

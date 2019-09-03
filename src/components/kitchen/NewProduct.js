@@ -110,7 +110,8 @@ class NewProduct extends Component {
                         }}
                         open={this.state.open}
                         autoHideDuration={6000}
-                        style={{backgroundColor: '#1AC30C'}}
+                        aria-describedby="client-snackbar"
+                        className="success"
                         onClose={this.handleClose}
                         message={    
                                 <span id="client-snackbar">
