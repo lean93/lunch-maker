@@ -7,6 +7,8 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Grid from '@material-ui/core/Grid';
+
 
 const units = [{value:1, label:"Unidad"}, {value:2, label:"Gramos (gr)"}, {value:3, label:"Kilos (kg)"},{value:4, label:"Litros (lts)"} ]
 
@@ -37,47 +39,53 @@ class KitchenComponent extends Component {
                         Cargar Nuevo Producto
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                   <TextField
-                        id="descripction"
-                        label="Descripcion"
-                        type="text"
-                        margin="normal"
-                        style={{margin:10}}
-                        variant="outlined"
-                        helperText="Ingrese la descripcion del producto"
-                    />
+                    <Grid container spacing={3}>
+                        <Grid item >
+                            <TextField
+                                id="descripction"
+                                label="Descripcion"
+                                type="text"
+                                margin="normal"
+                                variant="outlined"
+                                helperText="Ingrese la descripcion del producto"
+                            />
+                            </Grid>
+                            <Grid item>
+                            <TextField
+                                id="selectPound"
+                                select
+                                label="Unidad"
+                                onChange={this.handleChange}
+                                value={this.state.unit}
+                                margin="normal"
+                                variant="outlined"
+                                helperText="Seleccione la unidad de medida"
+                            >
+                                {units.map(option => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                                ))}
+                            </TextField>
+                            </Grid>
 
-                    <TextField
-                        id="selectPound"
-                        select
-                        label="Unidad"
-                        onChange={this.handleChange}
-                        value={this.state.unit}
-                        margin="normal"
-                        style={{margin:10}}
-                        variant="outlined"
-                        helperText="Seleccione la unidad de medida"
-                    >
-                        {units.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                        ))}
-                    </TextField>
+                            <Grid item>
+                            <TextField
+                                id="quantity"
+                                label="Cantidad"
+                                type="number"
+                                margin="normal"
+                                variant="outlined"
+                                helperText="Ingrese la cantidad disponible"
+                            />
+                            </Grid>
 
-                    <TextField
-                        id="quantity"
-                        label="Cantidad"
-                        type="number"
-                        style={{margin:10}}
-                        margin="normal"
-                        variant="outlined"
-                        helperText="Ingrese la cantidad disponible"
-                    />
-
-                    <Button variant="contained" color="primary" size="large"  style={{marginTop:20, marginBottom:40, marginLeft:20}}>
-                        Cargar
-                    </Button>
+                            <Grid item>
+                            <Button variant="contained" color="primary" size="large"  style={{marginTop:20}}>
+                                Cargar
+                            </Button>
+                            </Grid>
+                    </Grid>
                     </ExpansionPanelDetails>
                     </ExpansionPanel>
             </React.Fragment>
