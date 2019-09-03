@@ -6,7 +6,7 @@ export class KitchenProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemList:[]
+            itemList:JSON.parse(localStorage.getItem('lunch-make-products')) || [],
         }   
         this.onAddItem = this.onAddItem.bind(this);
         this.getItemsList = this.getItemsList.bind(this);
@@ -15,6 +15,7 @@ export class KitchenProvider extends Component {
     onAddItem(newItem) {
         let newData = this.state.itemList;
         newData.push(newItem);
+        localStorage.setItem('lunch-make-products', JSON.stringify(newData));
         this.setState({
             itemList: newData
         })

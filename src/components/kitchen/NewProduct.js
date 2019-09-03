@@ -4,8 +4,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { KitchenContext } from '../../context/Kitchen.context';
-
-
+import Snackbar from '@material-ui/core/Snackbar';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 const units = [{ value: 1, label: "Unidad" }, { value: 2, label: "Gramos (gr)" }, { value: 3, label: "Kilos (kg)" }, { value: 4, label: "Litros (lts)" }]
 
 class NewProduct extends Component {
@@ -13,11 +13,13 @@ class NewProduct extends Component {
         super(props)
         this.state = {
             unit: undefined,
-            description: undefined
+            description: undefined,
+            open:false
         }
         this.handleChange = this.handleChange.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
 
     handleChange(event) {
@@ -35,6 +37,17 @@ class NewProduct extends Component {
     onSubmit(){
         const context = this.props.context;
         context.onAddItem(this.state);
+        this.setState({
+            unit: '',
+            description: '',
+            unitValue: '',
+            open: true
+        })
+    }
+    handleClose(){
+        this.setState({
+            open:false
+        })
     }
 
     render() {
@@ -85,9 +98,26 @@ class NewProduct extends Component {
                 </Grid>
 
                 <Grid item>
-                    <Button variant="contained" color="primary" size="large" style={{ marginTop: 20 }} onClick={this.onSubmit}>
+                    <Button variant="contained" color="primary" size="large" style={{ marginTop: 20 }} 
+                            disabled={!this.state.description || !this.state.unit || !this.state.unitValue}
+                        onClick={this.onSubmit}>
                         Cargar
                     </Button>
+                    <Snackbar
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        open={this.state.open}
+                        autoHideDuration={6000}
+                        style={{backgroundColor: '#1AC30C'}}
+                        onClose={this.handleClose}
+                        message={    
+                                <span id="client-snackbar">
+                                    <CheckCircleOutlineIcon/>
+                                    Item Cargado Correctamente !!!
+                                </span>}
+                        />
                 </Grid>
             </Grid>
         );
