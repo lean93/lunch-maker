@@ -13,7 +13,6 @@ export class KitchenProvider extends Component {
     }
 
     onAddItem(newItem) {
-        console.log(newItem);
         let newData = this.state.itemList;
         newData.push(newItem);
         this.setState({
@@ -22,7 +21,6 @@ export class KitchenProvider extends Component {
     }
 
     getItemsList(){
-        console.log(this.state.itemList);
         return this.state.itemList || [];
     }
 

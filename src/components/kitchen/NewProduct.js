@@ -34,7 +34,6 @@ class NewProduct extends Component {
 
     onSubmit(){
         const context = this.props.context;
-        console.log(this.state);
         context.onAddItem(this.state);
     }
 
