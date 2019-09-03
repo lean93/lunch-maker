@@ -8,7 +8,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import KitchenIcon from '@material-ui/icons/Kitchen';
-import KitchenComponent from './components/KitchenComponent';
+import KitchenComponent from './components/kitchen/KitchenComponent';
+import { KitchenProvider } from './context/Kitchen.context';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,27 +58,29 @@ export default function ScrollableTabsButtonForce() {
   }
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons="on"
-          indicatorColor="primary"
-          textColor="primary"
-          aria-label="scrollable force tabs example"
-        >
-          <Tab label="Cocina" icon={<KitchenIcon />} {...a11yProps(0)} />
-          <Tab label="Recetas" icon={<ListAltIcon />} {...a11yProps(1)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-          <KitchenComponent/>
+    <KitchenProvider>
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="on"
+            indicatorColor="primary"
+            textColor="primary"
+            aria-label="scrollable force tabs example"
+          >
+            <Tab label="Cocina" icon={<KitchenIcon />} {...a11yProps(0)} />
+            <Tab label="Recetas" icon={<ListAltIcon />} {...a11yProps(1)} />
+          </Tabs>
+        </AppBar>
+        <TabPanel value={value} index={0}>
+          <KitchenComponent />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          Item Two
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-    </div>
+      </div>
+    </KitchenProvider>
   );
 }
